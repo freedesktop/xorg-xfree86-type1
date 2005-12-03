@@ -28,6 +28,8 @@ AM_MAINTAINER_MODE
 
 AC_PROG_INSTALL
 
+m4_ifdef([AS_HELP_STRING], , [m4_define([AS_HELP_STRING], m4_defn([AC_HELP_STRING]))])
+
 DEFAULT_FONTDIR=${libdir}/X11/fonts/Type1
 AC_ARG_WITH(fontdir,
 	AS_HELP_STRING([--with-fontdir=FONTDIR], [Path to install fonts]),
