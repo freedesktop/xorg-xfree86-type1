@@ -38,7 +38,13 @@ AC_ARG_WITH(fontdir,
 AC_SUBST(FONTDIR)
 
 AC_PATH_PROG(MKFONTSCALE, mkfontscale)
+if test x"$MKFONTSCALE" = x; then
+	AC_MSG_ERROR([mkfontscale is required to build xfree86-type1 fonts.])
+fi
 AC_PATH_PROG(MKFONTDIR, mkfontdir)
+if test x"$MKFONTDIR" = x; then
+	AC_MSG_ERROR([mkfontdir is required to build xfree86-type1 fonts.])
+fi
 AC_PATH_PROG(FCCACHE, fc-cache)
 
 XORG_RELEASE_VERSION
