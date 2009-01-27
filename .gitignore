@@ -8,3 +8,6 @@ configure
 install-sh
 missing
 *~
+font-xfree86-type1-*.tar.*
+ChangeLog
+tags

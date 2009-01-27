@@ -26,16 +26,10 @@ AC_INIT(font-xfree86-type1, [1.0.1], [https://bugs.freedesktop.org/enter_bug.cgi
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
 AM_MAINTAINER_MODE
 
+# Require xorg-macros: XORG_CHANGELOG
+m4_ifndef([XORG_MACROS_VERSION], [AC_FATAL([must install xorg-macros 1.2 or later before running autoconf/autogen])])
+XORG_MACROS_VERSION(1.2)
 AC_PROG_INSTALL
-
-m4_ifdef([AS_HELP_STRING], , [m4_define([AS_HELP_STRING], m4_defn([AC_HELP_STRING]))])
-
-DEFAULT_FONTDIR=${libdir}/X11/fonts/Type1
-AC_ARG_WITH(fontdir,
-	AS_HELP_STRING([--with-fontdir=FONTDIR], [Path to install fonts]),
-	[FONTDIR="$withval"],
-	[FONTDIR="$DEFAULT_FONTDIR"])
-AC_SUBST(FONTDIR)
 
 AC_PATH_PROG(MKFONTSCALE, mkfontscale)
 if test x"$MKFONTSCALE" = x; then
@@ -47,6 +41,13 @@ if test x"$MKFONTDIR" = x; then
 fi
 AC_PATH_PROG(FCCACHE, fc-cache)
 
+fontdir=${libdir}/X11/fonts/Type1
+AC_ARG_WITH(fontdir, AC_HELP_STRING([--with-fontdir=<pathname>],
+	[Path to install fonts]), [fontdir="$withval"])
+FONTDIR="$fontdir"
+AC_SUBST(FONTDIR)
+
 XORG_RELEASE_VERSION
+XORG_CHANGELOG
 
 AC_OUTPUT([Makefile])
