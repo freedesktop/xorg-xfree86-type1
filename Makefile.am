@@ -32,16 +32,7 @@ install-data-hook:
 	$(MKFONTSCALE) $(DESTDIR)$(fontdir)
 	@rm -f $(DESTDIR)$(fontdir)/font.dir
 	$(MKFONTDIR) $(DESTDIR)$(fontdir)
-	@(if `test -z '$(DESTDIR)'`; then \
-		echo $(FCCACHE) $(fontdir); \
-		$(FCCACHE) $(fontdir); \
-	else \
-		echo "***"; \
-		echo "*** Warning: fonts.cache not built"; \
-		echo "***"; \
-		echo "*** Generate this file manually on host system using fc-cache"; \
-		echo "***"; \
-	fi)
+	@RUN_FCCACHE@
 
 distuninstallcheck:
 	@:
